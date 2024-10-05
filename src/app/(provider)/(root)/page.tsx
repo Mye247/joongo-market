@@ -1,4 +1,4 @@
-import dealsAPI from "@/api/client";
+import dealsAPI from "@/api/getAPI";
 import Link from "next/link";
 
 async function HomePage() {
@@ -15,11 +15,14 @@ async function HomePage() {
           <li key={deal.id} className="border border-gray-300 rounded-md p-2">
             <Link href={`/deals/${deal.id}`}>
               <img src="" alt="" />
+
+              <h3 className="text-lg font-semibold mb-2">{deal.title}</h3>
+              <p className="text-sm text-gray-500 mb-2">
+                {deal.price.toLocaleString()}원
+              </p>
+              <p className="text-sm text-gray-500 mb-2">{deal.location}</p>
+              <p className="text-sm text-gray-500 mb-2">관심 22</p>
             </Link>
-            <h3 className="text-lg font-semibold mb-2">{deal.title}</h3>
-            <p className="text-sm text-gray-500 mb-2">{deal.price.toLocaleString()}원</p>
-            <p className="text-sm text-gray-500 mb-2">{deal.location}</p>
-            <p className="text-sm text-gray-500 mb-2">관심 22</p>
           </li>
         ))}
       </ul>

@@ -1,4 +1,6 @@
 export type deals = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  map?: any;
   id: number;
   authorId: string;
   title: string;

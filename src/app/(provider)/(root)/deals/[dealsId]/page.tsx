@@ -1,8 +1,34 @@
+import dealsAPI from "@/api/getAPI";
+import { deals } from "@/types/type";
+import Button from "./_components/Button";
 
-function DealsDetailPage() {
+async function DealsDetailPage(props: { params: { dealsId: number } }) {
+  const dealId = props.params.dealsId;
+  console.log(dealId);
+
+  const deal = (await dealsAPI.getDeal(dealId)) as deals;
+  console.log(deal);
+
+  if (!deal) return alert("정보가 없습니다...");
+
   return (
-    <div>page</div>
-  )
+    <main className="p-5">
+      <ul className="flex justify-center border border-gray-300 rounded-md p-5 w-[500px] items-center mx-auto">
+        {deal?.map((deal: deals) => (
+          <li key={deal.id}>
+            <h3 className="text-xl font-semibold">{deal.title}</h3>
+            <p>{deal.content}</p>
+            <p>{deal.price}</p>
+            <p>{deal.location}</p>
+
+            <div className="flex justify-end gap-2">
+              <Button dealId={dealId} />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
 }
 
-export default DealsDetailPage
+export default DealsDetailPage;
