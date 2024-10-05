@@ -1,8 +1,8 @@
-import dealsAPI from "@/api/getAPI";
+import getAPI from "@/api/getAPI";
 import Link from "next/link";
 
 async function HomePage() {
-  const deals = await dealsAPI.getDeals();
+  const deals = await getAPI.getDeals();
   console.log(deals);
 
   if (!deals) return alert("정보가 없습니다.");

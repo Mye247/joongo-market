@@ -19,9 +19,17 @@ async function getDeal(dealsId: number) {
   return deal;
 }
 
-const dealsAPI = {
+async function getUser() {
+  const response = await supabase.auth.getUser();
+  const user = response.data;
+
+  return user;
+}
+
+const getAPI = {
   getDeals,
   getDeal,
+  getUser,
 };
 
-export default dealsAPI;
+export default getAPI;

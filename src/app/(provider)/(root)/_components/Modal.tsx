@@ -20,9 +20,6 @@ function ModalPage() {
 
   const logIn = useAuthStore((state) => state.isLogIn);
 
-  const setIsUser = useAuthStore((state) => state.setIsUser);
-  
-
   // 바깥영역 클릭시 나가짐
   const handleToggleModal = () => {
     setIsModal(false);
@@ -48,7 +45,7 @@ function ModalPage() {
     if (result) logIn();
     alert("환영합니다!");
     setIsModal(false);
-    setIsUser();
+
     router.push("/");
   };
 

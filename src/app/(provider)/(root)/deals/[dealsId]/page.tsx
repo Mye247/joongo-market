@@ -1,4 +1,4 @@
-import dealsAPI from "@/api/getAPI";
+import getAPI from "@/api/getAPI";
 import { deals } from "@/types/type";
 import Button from "./_components/Button";
 
@@ -6,7 +6,7 @@ async function DealsDetailPage(props: { params: { dealsId: number } }) {
   const dealId = props.params.dealsId;
   console.log(dealId);
 
-  const deal = (await dealsAPI.getDeal(dealId)) as deals;
+  const deal = (await getAPI.getDeal(dealId)) as deals;
   console.log(deal);
 
   if (!deal) return alert("정보가 없습니다...");

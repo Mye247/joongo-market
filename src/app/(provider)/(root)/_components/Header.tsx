@@ -12,12 +12,10 @@ function Header({ children }: PropsWithChildren) {
 
   const setIsModal = useModalStore((state) => state.setIsModal);
 
-  const setIsNotUser = useAuthStore((state) => state.setIsNotUser);
-
   const handleClickLogout = async () => {
     const response = await supabase.auth.signOut();
     console.log(response);
-    setIsNotUser();
+
     logOut();
   };
 

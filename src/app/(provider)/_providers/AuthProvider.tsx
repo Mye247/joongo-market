@@ -13,24 +13,17 @@ function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     (async () => {
-      const user = await supabase.auth.getUser();
-      if (user.data) {
-        setIsUser();
-      } else {
-        setIsNotUser();
-      }
-    })();
-
-    (async () => {
       await supabase.auth.onAuthStateChange((event, session) => {
         if (session?.user) {
+          setIsUser();
           logIn();
         } else {
+          setIsNotUser();
           logOut();
         }
       });
     })();
-  }, [logIn, logOut, setIsUser]);
+  }, [logIn, logOut, setIsNotUser, setIsUser]);
 
   return children;
 }
