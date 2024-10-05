@@ -4,14 +4,12 @@ import supabase from "@/supabase/client";
 import { useAuthStore } from "@/zustand/authStore";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import ModalPage from "./Modal";
 import { useModalStore } from "@/zustand/modalStore";
 
 function Header({ children }: PropsWithChildren) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const logOut = useAuthStore((state) => state.isLogOut);
 
-  const isModal = useModalStore((state) => state.isModal);
   const setIsModal = useModalStore((state) => state.setIsModal);
 
   const handleClickLogout = async () => {
@@ -62,7 +60,7 @@ function Header({ children }: PropsWithChildren) {
           </div>
         )}
       </header>
-      {isModal === true ? <ModalPage /> : null}
+
       {children}
     </>
   );

@@ -18,7 +18,7 @@ function AuthProvider({ children }: PropsWithChildren) {
         }
       });
     })();
-  }, []);
+  }, [logIn, logOut]);
 
   return children;
 }

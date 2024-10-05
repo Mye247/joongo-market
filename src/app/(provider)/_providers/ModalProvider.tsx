@@ -9,8 +9,8 @@ function ModalProvider({ children }: PropsWithChildren) {
 
   return (
     <>
+      {isModal === true ? <ModalPage /> : null}
       {children}
-      {isModal && <ModalPage />}
     </>
   );
 }

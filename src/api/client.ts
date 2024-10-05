@@ -4,7 +4,7 @@ import { deals } from "@/types/type";
 async function getDeals() {
   try {
     const response = await supabase.from("deals").select("*");
-    const deals = response.data;
+    const deals = response.data as deals[];
 
     return deals;
   } catch (e) {

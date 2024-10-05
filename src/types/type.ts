@@ -1,6 +1,6 @@
 export type deals = {
   id: number;
-  authorId: number;
+  authorId: string;
   title: string;
   content: string;
   location: string;
