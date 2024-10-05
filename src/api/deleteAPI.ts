@@ -5,6 +5,8 @@ async function deleteDeal(dealsId: number) {
   return response;
 }
 
+
+
 const deleteAPI = {
   deleteDeal,
 };
