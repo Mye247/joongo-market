@@ -26,10 +26,38 @@ async function getUser() {
   return user;
 }
 
+async function getUserPosts(userId: string) {
+  const response = await supabase
+    .from("deals")
+    .select("*")
+    .eq("authorId", userId);
+  const likes = response.data;
+
+  return likes;
+}
+
+async function getUserLikePosts(userId: string) {
+  const response = await supabase
+    .from("deals")
+    .select(
+      `
+      *,
+      likes!inner(userId)
+    `
+    )
+    .eq("likes.userId", userId);
+
+  const data = response.data;
+
+  return data;
+}
+
 const getAPI = {
   getDeals,
   getDeal,
   getUser,
+  getUserPosts,
+  getUserLikePosts,
 };
 
 export default getAPI;

@@ -32,11 +32,13 @@ function Header({ children }: PropsWithChildren) {
 
         <nav>
           <ul className="flex gap-x-3">
-            <li>구입하기</li>
+            <li className="line-through">구입하기</li>
             <li>
               <Link href={"/deals/create"}>판매하기</Link>
             </li>
-            <li>내 판매글</li>
+            <li>
+              <Link href={"/my/deals"}>내 판매글</Link>
+            </li>
           </ul>
         </nav>
 

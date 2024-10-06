@@ -5,10 +5,14 @@ async function deleteDeal(dealsId: number) {
   return response;
 }
 
-
+async function deleteLike(dealId: number) {
+  const response = await supabase.from("likes").delete().eq("dealId", dealId);
+  return response;
+}
 
 const deleteAPI = {
   deleteDeal,
+  deleteLike,
 };
 
 export default deleteAPI;

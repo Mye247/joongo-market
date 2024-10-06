@@ -10,6 +10,11 @@ type AuthStoreState = {
   isUser: boolean;
   setIsUser: () => void;
   setIsNotUser: () => void;
+
+  // 관심 버튼 타입
+  isLike: boolean;
+  setIsLike: () => void;
+  setIsNotLike: () => void;
 };
 
 export const useAuthStore = create<AuthStoreState>((set) => ({
@@ -20,4 +25,8 @@ export const useAuthStore = create<AuthStoreState>((set) => ({
   isUser: false,
   setIsUser: () => set({ isUser: true }),
   setIsNotUser: () => set({ isUser: false }),
+
+  isLike: false,
+  setIsLike: () => set({ isLike: true }),
+  setIsNotLike: () => set({ isLike: false }),
 }));

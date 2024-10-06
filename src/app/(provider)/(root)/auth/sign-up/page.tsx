@@ -19,6 +19,7 @@ function SignUpPage() {
     const response = await supabase.auth.signUp({ email, password });
     console.log(response);
 
+    if (!response) return alert("회원가입에 실패하셨습니다!");
     if (response) return alert("회원가입에 성공하셨습니다!");
   };
 
