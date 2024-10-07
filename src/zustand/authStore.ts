@@ -15,6 +15,7 @@ type AuthStoreState = {
   isLike: boolean;
   setIsLike: () => void;
   setIsNotLike: () => void;
+
 };
 
 export const useAuthStore = create<AuthStoreState>((set) => ({

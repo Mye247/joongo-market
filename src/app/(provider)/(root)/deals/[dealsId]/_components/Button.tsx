@@ -20,22 +20,23 @@ function Button({ dealId }: { dealId: number }) {
   const setIsUser = useAuthStore((state) => state.setIsUser);
   const setIsNotUser = useAuthStore((state) => state.setIsNotUser);
 
+  // 모달 상태
   const setIsModal = useModalStore((state) => state.setIsModal);
 
+  // 관심 상태
   const isLike = useAuthStore((state) => state.isLike);
   const setIsLike = useAuthStore((state) => state.setIsLike);
   const setIsNotLike = useAuthStore((state) => state.setIsNotLike);
 
-  // const [user, setUser] = useState<deal | null>(null);
-  // console.log(user);
-
   // 로그인한 계정이 지금 들어와있는 글을 만든 계정인지 체크
   useEffect(() => {
     (async () => {
+      // 상세페이지 불러오기
       const response = (await getAPI.getDeal(dealId)) as deal;
       if (!response) return;
       // setUser(response[0].authorId);
 
+      // 글 수정 띄우기
       await supabase.auth.onAuthStateChange((_event, session) => {
         if (session?.user.id === response[0].authorId) {
           setIsUser();
@@ -43,6 +44,18 @@ function Button({ dealId }: { dealId: number }) {
           setIsNotUser();
         }
       });
+
+      // 관심버튼 상태 관리
+      const like = await supabase
+        .from("likes")
+        .select("*")
+        .eq("dealId", dealId);
+      console.log(like.data);
+      if (like.data!.length >= 1) {
+        setIsNotLike();
+      } else {
+        setIsLike();
+      }
     })();
   }, [dealId, setIsNotUser, setIsUser]);
 
@@ -56,7 +69,7 @@ function Button({ dealId }: { dealId: number }) {
 
   // 관심 버튼 (DB insert)
   const handleClickLikeBUtton = async () => {
-    if (!isLike) {
+    if (isLike) {
       await supabase.auth.onAuthStateChange(async (event, session) => {
         if (session?.user) {
           const userId = session.user.id;
@@ -71,8 +84,8 @@ function Button({ dealId }: { dealId: number }) {
       });
     } else {
       await deleteAPI.deleteLike(dealId);
-      alert("어쩔티비");
       setIsNotLike();
+      alert("어쩔티비");
     }
   };
 
@@ -82,7 +95,7 @@ function Button({ dealId }: { dealId: number }) {
         onClick={handleClickLikeBUtton}
         className="bg-blue-500 text-white px-3 py-1 rounded-md"
       >
-        {isLike ? "관심 취소" : "관심"}
+        {isLike ? "관심" : "관심 취소"}
       </button>
 
       {isUser ? (

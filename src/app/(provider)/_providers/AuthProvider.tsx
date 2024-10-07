@@ -8,8 +8,6 @@ function AuthProvider({ children }: PropsWithChildren) {
   const logIn = useAuthStore((state) => state.isLogIn);
   const logOut = useAuthStore((state) => state.isLogOut);
 
-
-
   useEffect(() => {
     (async () => {
       await supabase.auth.onAuthStateChange((_event, session) => {
