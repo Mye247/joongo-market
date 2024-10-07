@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Database } from "../../../../../../../database.types";
-import supabase from "@/supabase/client";
-import { useRouter } from "next/navigation";
 import getAPI from "@/api/getAPI";
-import { deals } from "@/types/type";
+import supabase from "@/supabase/client";
+import { deal } from "@/types/type";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Database } from "../../../../../../../database.types";
 
-function PostEditPage(props: any) {
+function PostEditPage(props: { params: { dealsId: number } }) {
   const { dealsId } = props.params;
 
   // 글 내용 저장용
@@ -16,16 +16,21 @@ function PostEditPage(props: any) {
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
 
-  const [deal, setDeal] = useState<deals>();
+  const [deal, setDeal] = useState<deal>();
+  console.log(deal);
 
   const router = useRouter();
 
   useEffect(() => {
     (async () => {
       const response = await getAPI.getDeal(dealsId);
-      console.log(response);
       if (!response) return;
-      setDeal(response!);
+      setDeal(response[0]);
+
+      setTitle(response[0].title);
+      setContent(response[0].content);
+      setLocation(response[0].location);
+      setPrice(response[0].price);
     })();
   }, [dealsId]);
 
@@ -55,7 +60,6 @@ function PostEditPage(props: any) {
     router.push("/");
   };
 
-  // 이따 저녁에 map돌려서 데이터 뽑기
   return (
     <main className="p-5 flex flex-col justify-center items-center">
       <h2 className="font-semibold text-xl">판매글 수정하기</h2>
@@ -65,7 +69,7 @@ function PostEditPage(props: any) {
           <input
             id="title"
             type="text"
-            value={deal?.title}
+            value={title}
             className="border border-black w-[300px] h-[40px] ml-8"
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -76,7 +80,7 @@ function PostEditPage(props: any) {
           <input
             id="content"
             type="text"
-            value={deal?.content}
+            value={content}
             className="border border-black w-[300px] h-[40px] ml-8"
             onChange={(e) => setContent(e.target.value)}
           />
@@ -87,7 +91,7 @@ function PostEditPage(props: any) {
           <input
             id="location"
             type="text"
-            value={deal?.location}
+            value={location}
             className="border border-black w-[300px] h-[40px]"
             onChange={(e) => setLocation(e.target.value)}
           />
@@ -98,7 +102,7 @@ function PostEditPage(props: any) {
           <input
             id="price"
             type="text"
-            value={deal?.price}
+            value={price}
             className="border border-black w-[300px] h-[40px] ml-4"
             onChange={(e) => setPrice(e.target.value)}
           />

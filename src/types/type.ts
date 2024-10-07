@@ -8,3 +8,13 @@ export type deals = {
   location: string;
   price: number;
 };
+
+export type deal = {
+  id: number;
+  authorId: string;
+  title: string;
+  content: string;
+  location: string;
+  price: number;
+};
+
