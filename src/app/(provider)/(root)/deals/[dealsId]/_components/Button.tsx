@@ -1,13 +1,15 @@
 "use client";
 
 import deleteAPI from "@/api/deleteAPI";
+import getAPI from "@/api/getAPI";
 import insertAPI from "@/api/insertAPI";
 import supabase from "@/supabase/client";
+import { deal } from "@/types/type";
 import { useAuthStore } from "@/zustand/authStore";
 import { useModalStore } from "@/zustand/modalStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import { useEffect } from "react";
 
 function Button({ dealId }: { dealId: number }) {
   // 홈으로 ~
@@ -15,13 +17,34 @@ function Button({ dealId }: { dealId: number }) {
 
   // 유저 정보 체크
   const isUser = useAuthStore((state) => state.isUser);
-  console.log(isUser);
+  const setIsUser = useAuthStore((state) => state.setIsUser);
+  const setIsNotUser = useAuthStore((state) => state.setIsNotUser);
 
   const setIsModal = useModalStore((state) => state.setIsModal);
 
   const isLike = useAuthStore((state) => state.isLike);
   const setIsLike = useAuthStore((state) => state.setIsLike);
   const setIsNotLike = useAuthStore((state) => state.setIsNotLike);
+
+  // const [user, setUser] = useState<deal | null>(null);
+  // console.log(user);
+
+  // 로그인한 계정이 지금 들어와있는 글을 만든 계정인지 체크
+  useEffect(() => {
+    (async () => {
+      const response = (await getAPI.getDeal(dealId)) as deal;
+      if (!response) return;
+      // setUser(response[0].authorId);
+
+      await supabase.auth.onAuthStateChange((_event, session) => {
+        if (session?.user.id === response[0].authorId) {
+          setIsUser();
+        } else {
+          setIsNotUser();
+        }
+      });
+    })();
+  }, [dealId, setIsNotUser, setIsUser]);
 
   // 글 삭제 (DB delete)
   const handleClickDelete = async () => {

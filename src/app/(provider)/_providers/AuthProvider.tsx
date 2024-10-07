@@ -8,22 +8,19 @@ function AuthProvider({ children }: PropsWithChildren) {
   const logIn = useAuthStore((state) => state.isLogIn);
   const logOut = useAuthStore((state) => state.isLogOut);
 
-  const setIsUser = useAuthStore((state) => state.setIsUser);
-  const setIsNotUser = useAuthStore((state) => state.setIsNotUser);
+
 
   useEffect(() => {
     (async () => {
       await supabase.auth.onAuthStateChange((_event, session) => {
         if (session?.user) {
-          setIsUser();
           logIn();
         } else {
-          setIsNotUser();
           logOut();
         }
       });
     })();
-  }, [logIn, logOut, setIsNotUser, setIsUser]);
+  }, [logIn, logOut]);
 
   return children;
 }
