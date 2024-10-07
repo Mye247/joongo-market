@@ -1,10 +1,8 @@
 import getAPI from "@/api/getAPI";
+import { baseUrl } from "@/types/type";
 import Link from "next/link";
 
 async function HomePage() {
-  const baseUrl =
-    "https://frghixucjmwdoiizjraf.supabase.co/storage/v1/object/public/deals/";
-
   const deals = await getAPI.getDeals();
   console.log(deals);
 
@@ -17,7 +15,7 @@ async function HomePage() {
         {deals?.map((deal) => (
           <li key={deal.id} className="border border-gray-300 rounded-md p-2">
             <Link href={`/deals/${deal.id}`}>
-              <img src={baseUrl + deal.imageUrl} alt="" />
+              <img src={baseUrl + deal.imageUrl} alt="" className="w-[300px] h-[300px] ml-12 mb-3 rounded-lg" />
 
               <h3 className="text-lg font-semibold mb-2">{deal.title}</h3>
               <p className="text-sm text-gray-500 mb-2">

@@ -51,11 +51,6 @@ function DealsCreatePage() {
     const response = await supabase.from("deals").insert(data);
     console.log(response);
 
-    // await supabase
-    //   .from("deals")
-    //   .update({ imageUrl: response.data })
-    //   .eq("id", response.data.id);
-
     if (!response) return alert("글 작성에 실패했습니다!...");
     if (response) return alert("글 작성에 성공했습니다!...");
 

@@ -16,6 +16,8 @@ type AuthStoreState = {
   setIsLike: () => void;
   setIsNotLike: () => void;
 
+  isAuthInitialized: boolean;
+  setAuthInitialized: () => void;
 };
 
 export const useAuthStore = create<AuthStoreState>((set) => ({
@@ -30,4 +32,7 @@ export const useAuthStore = create<AuthStoreState>((set) => ({
   isLike: false,
   setIsLike: () => set({ isLike: true }),
   setIsNotLike: () => set({ isLike: false }),
+
+  isAuthInitialized: false,
+  setAuthInitialized: () => set({ isAuthInitialized: true }),
 }));

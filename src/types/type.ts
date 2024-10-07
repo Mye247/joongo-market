@@ -19,3 +19,5 @@ export type deal = {
   price: number;
 };
 
+export const baseUrl =
+  "https://frghixucjmwdoiizjraf.supabase.co/storage/v1/object/public/deals/";

@@ -10,6 +10,8 @@ function Header({ children }: PropsWithChildren) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const logOut = useAuthStore((state) => state.isLogOut);
 
+  const isAuthInitialized = useAuthStore((state) => state.isAuthInitialized);
+
   const setIsModal = useModalStore((state) => state.setIsModal);
 
   const handleClickLogout = async () => {
@@ -44,7 +46,7 @@ function Header({ children }: PropsWithChildren) {
           </ul>
         </nav>
 
-        {isLoggedIn ? (
+        {isAuthInitialized && (isLoggedIn ? (
           <div className="ml-auto">
             <ul className="flex items-center gap-x-3">
               <li>
@@ -63,7 +65,7 @@ function Header({ children }: PropsWithChildren) {
               </li>
             </ul>
           </div>
-        )}
+        ))}
       </header>
 
       {children}

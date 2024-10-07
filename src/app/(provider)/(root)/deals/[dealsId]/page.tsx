@@ -1,5 +1,5 @@
 import getAPI from "@/api/getAPI";
-import { deals } from "@/types/type";
+import { baseUrl, deals } from "@/types/type";
 import Button from "./_components/Button";
 
 async function DealsDetailPage(props: { params: { dealsId: number } }) {
@@ -13,9 +13,10 @@ async function DealsDetailPage(props: { params: { dealsId: number } }) {
 
   return (
     <main className="p-5">
-      <ul className="flex justify-center border border-gray-300 rounded-md p-5 w-[500px] h-[300px] mx-auto">
+      <ul className="flex justify-center border border-gray-300 rounded-md p-5 w-[500px] h-screen mx-auto">
         {deal?.map((deal: deals) => (
           <li key={deal.id}>
+            <img src={baseUrl + deal.imageUrl} alt="" className="w-[300px] h-[300px] mb-5"/>
             <h3 className="text-xl font-semibold mb-2">{deal.title}</h3>
             <p className="mb-2">{deal.content}</p>
             <p className="mb-2">{deal.price}</p>
