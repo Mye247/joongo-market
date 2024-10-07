@@ -33,46 +33,46 @@ function MyDealsPage() {
   console.log(userId);
 
   return (
-    <main className="p-4">
-      <div>
-        <h2 className="text-2xl font-bold mb-4">내 판매글</h2>
+    <main className="p-4 flex gap-4 justify-around">
+      <h2 className="text-2xl font-bold my-4">내 판매글</h2>
 
+      <div className="ml-5">
+        <h3 className="text-lg font-bold mb-3">내가 작성한 판매글</h3>
         <ul className="grid grid-cols-2 gap-4">
-          <div>
-            <h3 className="text-lg font-bold mb-3">내가 작성한 판매글</h3>
-            {posts &&
-              posts.map((post) => (
-                <li key={post.id} className="mb-5">
-                  <Link href={`/deals/${post.id}`}>
-                    <img
-                      src={baseUrl + post.imageUrl}
-                      alt=""
-                      className="w-[200px] h-[200px] rounded-lg"
-                    />
-                    <h4>{post.title}</h4>
-                    <p>{post.content}</p>
-                    <p>{post.price}</p>
-                  </Link>
-                </li>
-              ))}
-          </div>
-
-          <div>
-            <h3 className="text-lg font-bold mb-5">내가 관심 누른 판매글</h3>
-            {likes &&
-              likes.map((like) => (
-                <li key={like.id} className="mb-3">
+          {posts &&
+            posts.map((post) => (
+              <li key={post.id} className="mb-5">
+                <Link href={`/deals/${post.id}`}>
                   <img
-                    src={baseUrl + like.imageUrl}
+                    src={baseUrl + post.imageUrl}
                     alt=""
-                    className="w-[200px] h-[200px]"
+                    className="w-[200px] h-[200px] rounded-lg"
                   />
-                  <h4>{like.title}</h4>
-                  <p>{like.content}</p>
-                  <p>{like.price}</p>
-                </li>
-              ))}
-          </div>
+                  <h4>{post.title}</h4>
+                  <p>{post.content}</p>
+                  <p>{post.price}</p>
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-bold mb-5">내가 관심 누른 판매글</h3>
+        <ul>
+          {likes &&
+            likes.map((like) => (
+              <li key={like.id} className="mb-3">
+                <img
+                  src={baseUrl + like.imageUrl}
+                  alt=""
+                  className="w-[200px] h-[200px]"
+                />
+                <h4>{like.title}</h4>
+                <p>{like.content}</p>
+                <p>{like.price}</p>
+              </li>
+            ))}
         </ul>
       </div>
     </main>

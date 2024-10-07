@@ -4,7 +4,10 @@ import { deals } from "@/types/type";
 // 글 전부 가져오기
 async function getDeals() {
   try {
-    const response = await supabase.from("deals").select("*");
+    const response = await supabase
+      .from("deals")
+      .select("*")
+      .limit(1000000000000000);
     const deals = response.data as deals[];
 
     return deals;
@@ -15,7 +18,11 @@ async function getDeals() {
 
 // 글 상세페이지
 async function getDeal(dealsId: number) {
-  const response = await supabase.from("deals").select("*").eq("id", dealsId);
+  const response = await supabase
+    .from("deals")
+    .select("*")
+    .eq("id", dealsId)
+    .limit(1000000000000000);
   const deal = response.data as deals | null;
 
   return deal;
