@@ -6,7 +6,7 @@ async function HomePage() {
   const deals = await getAPI.getDeals();
   console.log(deals);
 
-  if (!deals) return alert("정보가 없습니다.");
+  if (!deals) return <div>정보가 없습니다!</div>;
 
   return (
     <div className="p-5">
@@ -15,7 +15,11 @@ async function HomePage() {
         {deals?.map((deal) => (
           <li key={deal.id} className="border border-gray-300 rounded-md p-2">
             <Link href={`/deals/${deal.id}`}>
-              <img src={baseUrl + deal.imageUrl} alt="" className="w-[300px] h-[300px] ml-12 mb-3 rounded-lg" />
+              <img
+                src={baseUrl + deal.imageUrl}
+                alt=""
+                className="w-[300px] h-[300px] ml-12 mb-3 rounded-lg"
+              />
 
               <h3 className="text-lg font-semibold mb-2">{deal.title}</h3>
               <p className="text-sm text-gray-500 mb-2">

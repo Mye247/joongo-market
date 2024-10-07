@@ -12,7 +12,7 @@ function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     (async () => {
-      await supabase.auth.onAuthStateChange((_event, session) => {
+      supabase.auth.onAuthStateChange((_event, session) => {
         if (session?.user) {
           logIn();
         } else {

@@ -26,12 +26,13 @@ function PostEditPage(props: { params: { dealsId: number } }) {
     (async () => {
       const response = await getAPI.getDeal(dealsId);
       if (!response) return;
-      setDeal(response[0]);
+      const deal = response[0];
+      setDeal(deal[0]);
 
-      setTitle(response[0].title);
-      setContent(response[0].content);
-      setLocation(response[0].location);
-      setPrice(response[0].price);
+      setTitle(deal.title);
+      setContent(deal.content);
+      setLocation(deal.location);
+      setPrice(deal.price);
     })();
   }, [dealsId]);
 

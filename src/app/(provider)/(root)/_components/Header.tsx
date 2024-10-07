@@ -35,37 +35,41 @@ function Header({ children }: PropsWithChildren) {
         <nav>
           <ul className="flex gap-x-3">
             <li className="line-through">구입하기</li>
-            <li>
-              <Link href={"/deals/create"}>판매하기</Link>
-            </li>
             {isLoggedIn ? (
-              <li>
-                <Link href={"/my/deals"}>내 판매글</Link>
-              </li>
+              <>
+                <li>
+                  <Link href={"/deals/create"}>판매하기</Link>
+                </li>
+
+                <li>
+                  <Link href={"/my/deals"}>내 판매글</Link>
+                </li>
+              </>
             ) : null}
           </ul>
         </nav>
 
-        {isAuthInitialized && (isLoggedIn ? (
-          <div className="ml-auto">
-            <ul className="flex items-center gap-x-3">
-              <li>
-                <button onClick={handleClickLogout}>로그아웃</button>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <div className="ml-auto">
-            <ul className="flex items-center gap-x-3">
-              <li>
-                <Link href={"/auth/sign-up"}>회원가입</Link>
-              </li>
-              <li>
-                <button onClick={handleClickLogin}>로그인</button>
-              </li>
-            </ul>
-          </div>
-        ))}
+        {isAuthInitialized &&
+          (isLoggedIn ? (
+            <div className="ml-auto">
+              <ul className="flex items-center gap-x-3">
+                <li>
+                  <button onClick={handleClickLogout}>로그아웃</button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="ml-auto">
+              <ul className="flex items-center gap-x-3">
+                <li>
+                  <Link href={"/auth/sign-up"}>회원가입</Link>
+                </li>
+                <li>
+                  <button onClick={handleClickLogin}>로그인</button>
+                </li>
+              </ul>
+            </div>
+          ))}
       </header>
 
       {children}

@@ -85,7 +85,7 @@ function Button({ dealId }: { dealId: number }) {
     } else {
       await deleteAPI.deleteLike(dealId);
       setIsNotLike();
-      alert("어쩔티비");
+      alert("관심이 안가네용.....");
     }
   };
 

@@ -16,7 +16,11 @@ async function DealsDetailPage(props: { params: { dealsId: number } }) {
       <ul className="flex justify-center border border-gray-300 rounded-md p-5 w-[500px] h-screen mx-auto">
         {deal?.map((deal: deals) => (
           <li key={deal.id}>
-            <img src={baseUrl + deal.imageUrl} alt="" className="w-[300px] h-[300px] mb-5"/>
+            <img
+              src={baseUrl + deal.imageUrl}
+              alt=""
+              className="w-[300px] h-[300px] mb-5"
+            />
             <h3 className="text-xl font-semibold mb-2">{deal.title}</h3>
             <p className="mb-2">{deal.content}</p>
             <p className="mb-2">{deal.price}</p>
