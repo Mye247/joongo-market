@@ -2,9 +2,9 @@
 
 import supabase from "@/supabase/client";
 import { useAuthStore } from "@/zustand/authStore";
+import { useModalStore } from "@/zustand/modalStore";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import { useModalStore } from "@/zustand/modalStore";
 
 function Header({ children }: PropsWithChildren) {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
@@ -36,9 +36,11 @@ function Header({ children }: PropsWithChildren) {
             <li>
               <Link href={"/deals/create"}>판매하기</Link>
             </li>
-            <li>
-              <Link href={"/my/deals"}>내 판매글</Link>
-            </li>
+            {isLoggedIn ? (
+              <li>
+                <Link href={"/my/deals"}>내 판매글</Link>
+              </li>
+            ) : null}
           </ul>
         </nav>
 

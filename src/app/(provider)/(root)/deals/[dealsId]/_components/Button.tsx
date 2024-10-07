@@ -57,7 +57,7 @@ function Button({ dealId }: { dealId: number }) {
         setIsLike();
       }
     })();
-  }, [dealId, setIsNotUser, setIsUser]);
+  }, [dealId, setIsLike, setIsNotLike, setIsNotUser, setIsUser]);
 
   // 글 삭제 (DB delete)
   const handleClickDelete = async () => {

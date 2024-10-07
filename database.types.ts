@@ -15,6 +15,7 @@ export type Database = {
           content: string;
           createdAt: string;
           id: number;
+          imageUrl: string;
           location: string;
           price: number;
           title: string;
@@ -24,6 +25,7 @@ export type Database = {
           content?: string;
           createdAt?: string;
           id?: number;
+          imageUrl: string;
           location?: string;
           price: number;
           title?: string;
@@ -33,6 +35,7 @@ export type Database = {
           content?: string;
           createdAt?: string;
           id?: number;
+          imageUrl?: string;
           location?: string;
           price?: number;
           title?: string;

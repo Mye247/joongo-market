@@ -2,7 +2,6 @@
 
 import getAPI from "@/api/getAPI";
 import supabase from "@/supabase/client";
-import { deal } from "@/types/type";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Database } from "../../../../../../../database.types";
@@ -16,7 +15,7 @@ function PostEditPage(props: { params: { dealsId: number } }) {
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
 
-  const [deal, setDeal] = useState<deal>();
+  const [deal, setDeal] = useState();
   console.log(deal);
 
   const router = useRouter();

@@ -2,21 +2,23 @@
 
 import getAPI from "@/api/getAPI";
 import { deals } from "@/types/type";
-import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 function MyDealsPage() {
+  // 상태 모음
   const [userId, setUserId] = useState("");
   const [posts, setPosts] = useState<deals[]>([]);
-
   const [likes, setLikes] = useState<deals[]>([]);
 
   useEffect(() => {
     (async () => {
-      // 유저가 쓴 글 가져오기
+      // 현재 유저 정보 가져오기
       const user = await getAPI.getUser();
       setUserId(String(user.user?.id));
       if (!String(user.user?.id)) return;
 
+      // 현재 유저가 작성한 글 가져오기
       const post = await getAPI.getUserPosts(userId);
       console.log("post", post);
       setPosts(post!);
@@ -41,9 +43,12 @@ function MyDealsPage() {
             {posts &&
               posts.map((post) => (
                 <li key={post.id} className="mb-3">
-                  <h4>{post.title}</h4>
-                  <p>{post.content}</p>
-                  <p>{post.price}</p>
+                  <Link href={`/deals/${post.id}`}>
+                    <img src="" alt="" />
+                    <h4>{post.title}</h4>
+                    <p>{post.content}</p>
+                    <p>{post.price}</p>
+                  </Link>
                 </li>
               ))}
           </div>

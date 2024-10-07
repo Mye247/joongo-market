@@ -7,6 +7,7 @@ export type deals = {
   content: string;
   location: string;
   price: number;
+  imageUrl: string;
 };
 
 export type deal = {
