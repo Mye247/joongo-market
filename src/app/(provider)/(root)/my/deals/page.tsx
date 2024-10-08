@@ -1,15 +1,15 @@
 "use client";
 
 import getAPI from "@/api/getAPI";
-import { baseUrl, deals } from "@/types/type";
+import { BaseUrl, Deals } from "@/types/type";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 function MyDealsPage() {
   // 상태 모음
   const [userId, setUserId] = useState("");
-  const [posts, setPosts] = useState<deals[]>([]);
-  const [likes, setLikes] = useState<deals[]>([]);
+  const [posts, setPosts] = useState<Deals[]>([]);
+  const [likes, setLikes] = useState<Deals[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -44,7 +44,7 @@ function MyDealsPage() {
               <li key={post.id} className="mb-5">
                 <Link href={`/deals/${post.id}`}>
                   <img
-                    src={baseUrl + post.imageUrl}
+                    src={BaseUrl + post.imageUrl}
                     alt=""
                     className="w-[200px] h-[200px] rounded-lg"
                   />
@@ -64,7 +64,7 @@ function MyDealsPage() {
             likes.map((like) => (
               <li key={like.id} className="mb-3">
                 <img
-                  src={baseUrl + like.imageUrl}
+                  src={BaseUrl + like.imageUrl}
                   alt=""
                   className="w-[200px] h-[200px]"
                 />

@@ -1,14 +1,11 @@
 import supabase from "@/supabase/client";
-import { deals } from "@/types/type";
+import { Deals } from "@/types/type";
 
 // 글 전부 가져오기
 async function getDeals() {
   try {
-    const response = await supabase
-      .from("deals")
-      .select("*")
-      .limit(1000000000000000);
-    const deals = response.data as deals[];
+    const response = await supabase.from("deals").select("*").limit(100);
+    const deals = response.data as Deals[];
 
     return deals;
   } catch (e) {
@@ -22,8 +19,9 @@ async function getDeal(dealsId: number) {
     .from("deals")
     .select("*")
     .eq("id", dealsId)
-    .limit(1000000000000000);
-  const deal = response.data as deals | null;
+    .limit(1000000000000000)
+    .single();
+  const deal = response.data as Deals | null;
 
   return deal;
 }

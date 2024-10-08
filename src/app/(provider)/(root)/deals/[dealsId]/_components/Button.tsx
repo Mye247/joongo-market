@@ -4,7 +4,7 @@ import deleteAPI from "@/api/deleteAPI";
 import getAPI from "@/api/getAPI";
 import insertAPI from "@/api/insertAPI";
 import supabase from "@/supabase/client";
-import { deal } from "@/types/type";
+import { Deal } from "@/types/type";
 import { useAuthStore } from "@/zustand/authStore";
 import { useModalStore } from "@/zustand/modalStore";
 import Link from "next/link";
@@ -32,13 +32,13 @@ function Button({ dealId }: { dealId: number }) {
   useEffect(() => {
     (async () => {
       // 상세페이지 불러오기
-      const response = (await getAPI.getDeal(dealId)) as deal;
+      const response = (await getAPI.getDeal(dealId)) as Deal;
       if (!response) return;
       // setUser(response[0].authorId);
 
       // 글 수정 띄우기
       await supabase.auth.onAuthStateChange((_event, session) => {
-        if (session?.user.id === response[0].authorId) {
+        if (session?.user.id === response.authorId) {
           setIsUser();
         } else {
           setIsNotUser();

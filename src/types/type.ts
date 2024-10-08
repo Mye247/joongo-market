@@ -1,4 +1,4 @@
-export type deals = {
+export type Deals = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   map?: any;
   id: number;
@@ -10,7 +10,7 @@ export type deals = {
   imageUrl: string;
 };
 
-export type deal = {
+export type Deal = {
   id: number;
   authorId: string;
   title: string;
@@ -19,5 +19,5 @@ export type deal = {
   price: number;
 };
 
-export const baseUrl =
+export const BaseUrl =
   "https://frghixucjmwdoiizjraf.supabase.co/storage/v1/object/public/deals/";

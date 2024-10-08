@@ -2,7 +2,7 @@
 
 import getAPI from "@/api/getAPI";
 import supabase from "@/supabase/client";
-import { baseUrl } from "@/types/type";
+import { BaseUrl, Deal } from "@/types/type";
 import { useRouter } from "next/navigation";
 import { ComponentProps, useEffect, useState } from "react";
 import { Database } from "../../../../../../../database.types";
@@ -17,7 +17,7 @@ function PostEditPage(props: { params: { dealsId: number } }) {
   const [price, setPrice] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
-  const [deal, setDeal] = useState();
+  const [deal, setDeal] = useState<Deal | null>(null);
   console.log(deal);
 
   const router = useRouter();
@@ -26,13 +26,13 @@ function PostEditPage(props: { params: { dealsId: number } }) {
     (async () => {
       const response = await getAPI.getDeal(dealsId);
       if (!response) return;
-      const deal = response[0];
-      setDeal(deal[0]);
+      const deal = response;
+      setDeal(deal);
 
       setTitle(deal.title);
       setContent(deal.content);
       setLocation(deal.location);
-      setPrice(deal.price);
+      setPrice(String(deal.price));
     })();
   }, [dealsId]);
 
@@ -82,7 +82,7 @@ function PostEditPage(props: { params: { dealsId: number } }) {
         <li className="flex gap-5 items-center ">
           <label htmlFor="img">물건 이미지</label>
           <input id="img" type="file" onChange={handleChangeFileInput} />
-          <img src={baseUrl + file?.name} alt="" />
+          <img src={BaseUrl + file?.name} alt="" />
         </li>
 
         <li className="flex gap-5 items-center ">
