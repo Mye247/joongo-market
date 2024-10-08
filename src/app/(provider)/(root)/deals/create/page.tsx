@@ -1,13 +1,14 @@
 "use client";
 
 import supabase from "@/supabase/client";
+import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
 import { ComponentProps, useState } from "react";
 import { Database } from "../../../../../../database.types";
 
 function DealsCreatePage() {
   // 글 내용 저장용
-  const [file, setFile] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -21,31 +22,37 @@ function DealsCreatePage() {
     const files = e.target.files;
 
     if (!files) return;
-    if (files.length === 0) return setFile(null);
+    if (files.length === 0) return setImage(null);
 
     const file = files[0];
-    setFile(file);
+    setImage(file);
   };
 
   // 글, 이미지 집어넣기
   const handleClickCreateDeal = async () => {
-    if (!file) return alert("이미지를 업로드해주세요!");
+    if (!image) return alert("이미지를 업로드해주세요!");
     if (!title) return alert("글 제목을 입력해주세요!");
     if (!content) return alert("글 내용을 입력해주세요!");
     if (!location) return alert("직거래 위치를 입력해주세요!");
     if (!price) return alert("물건의 가격을 입력해주세요!");
 
+    const extension = image.name.split(".").slice(-1)[0];
+    const filePath = nanoid();
+    const path = `${filePath}.${extension}`;
+
     const img = await supabase.storage
       .from("deals")
-      .upload(file.name, file, { upsert: true });
+      .upload(path, image, { upsert: true });
     console.log(img);
+
+    const imgUrl = String(img.data?.fullPath);
 
     const data: Database["public"]["Tables"]["deals"]["Insert"] = {
       title,
       content,
       location,
       price: Number(price),
-      imageUrl: file.name,
+      imageUrl: imgUrl,
     };
 
     const response = await supabase.from("deals").insert(data);

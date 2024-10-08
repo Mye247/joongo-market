@@ -1,23 +1,29 @@
 export type Deals = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   map?: any;
-  id: number;
   authorId: string;
-  title: string;
   content: string;
+  createdAt: string;
+  id: number;
+  imageUrl: string;
   location: string;
   price: number;
-  imageUrl: string;
+  title: string;
 };
 
 export type Deal = {
-  id: number;
   authorId: string;
-  title: string;
   content: string;
+  createdAt?: string;
+  id: number;
+  imageUrl: string;
   location: string;
   price: number;
+  title: string;
 };
 
 export const BaseUrl =
-  "https://frghixucjmwdoiizjraf.supabase.co/storage/v1/object/public/deals/";
+  "https://frghixucjmwdoiizjraf.supabase.co/storage/v1/object/public/";
+
+{
+}
