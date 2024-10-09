@@ -30,6 +30,7 @@ function DealsCreatePage() {
 
   // 글, 이미지 집어넣기
   const handleClickCreateDeal = async () => {
+    
     if (!image) return alert("이미지를 업로드해주세요!");
     if (!title) return alert("글 제목을 입력해주세요!");
     if (!content) return alert("글 내용을 입력해주세요!");

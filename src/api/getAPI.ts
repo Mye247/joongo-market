@@ -19,7 +19,7 @@ async function getDeal(dealsId: number) {
     .from("deals")
     .select("*")
     .eq("id", dealsId)
-    .limit(1000000000000000)
+    .limit(100)
     .single();
   const deal = response.data as Deals | null;
 
