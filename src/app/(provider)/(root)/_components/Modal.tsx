@@ -4,9 +4,9 @@ import supabase from "@/supabase/client";
 import { useAuthStore } from "@/zustand/authStore";
 import { useModalStore } from "@/zustand/modalStore";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 
-function ModalPage() {
+function Modal() {
   // 홈으로 이동
   const router = useRouter();
 
@@ -99,4 +99,4 @@ function ModalPage() {
   );
 }
 
-export default ModalPage;
+export default Modal;
